@@ -1,0 +1,12 @@
+---
+description: How to work alongside the other AI agents on this repo
+alwaysApply: true
+---
+
+Several AI agents work on this repo at once. You are the `cursor` agent. Your job is the public website: `app/(site)/`, the site components, `config/clients/`, `config/services.ts`, and `public/`. The full list is in `.agents/roster.json`.
+
+Follow `.claude/skills/agent-sync/SKILL.md` on every task:
+
+1. Before editing, branch from `origin/main` as `cursor/<topic>`, run `npm run agents:sync`, and do any Asks addressed to `@cursor`.
+2. Only edit files you own. For anything else, add an Ask to the owner in `.agents/status/cursor.md`.
+3. Before pushing, run `npm run agents:sync` again and fix every `!` line. Update `.agents/status/cursor.md`, commit it with your work, push your branch, and open a PR to `main`.
