@@ -23,6 +23,8 @@ Several AI agents work on this repo at the same time. Each one has its own job, 
 | Claude Code in Terminal on the owner's Mac | `claude-code-local` | `claude-local/<topic>` |
 | Grok | `grok` | `grok/<topic>` |
 
+Grok can run inside Cursor. If your task says you are Grok, you are `grok`, not `cursor`, whatever tool you run in.
+
 The script works this out from your branch name. If it can't, pass `npm run agents:sync -- --agent <id>`.
 
 ## Before you edit anything
