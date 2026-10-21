@@ -1,0 +1,103 @@
+{
+  "base": "main",
+  "remote": "origin",
+  "staleDays": 14,
+  "agents": [
+    {
+      "id": "claude-chat",
+      "name": "Claude on claude.ai (coordinator)",
+      "runs": "claude.ai chat, with the Vercel and GitHub connectors",
+      "branchPrefix": "claude-chat/",
+      "mission": "Plans the work and hands it out through the Asks section of its status file. Keeps this roster current, reviews PRs before the owner merges them, and owns the Vercel project settings in the Vercel dashboard. Does not write app code.",
+      "owns": [
+        ".agents/roster.json",
+        "README.md"
+      ]
+    },
+    {
+      "id": "cursor",
+      "name": "Cursor agent (public website)",
+      "runs": "Cursor background agents",
+      "branchPrefix": "cursor/",
+      "mission": "Everything a visitor sees: the public pages, the quote form, copy, photos, SEO, and the per-client config files. New client sites start here.",
+      "owns": [
+        "app/(site)/",
+        "app/icon.svg",
+        "app/not-found.tsx",
+        "components/site-header.tsx",
+        "components/site-footer.tsx",
+        "components/sticky-bar.tsx",
+        "components/quote-form.tsx",
+        "components/logo.tsx",
+        "components/photo-frame.tsx",
+        "config/clients/",
+        "config/services.ts",
+        "public/"
+      ]
+    },
+    {
+      "id": "claude-code-cloud",
+      "name": "Claude Code on the web (dashboard and data)",
+      "runs": "claude.ai/code cloud sessions",
+      "branchPrefix": "claude/",
+      "env": "CLAUDE_CODE_REMOTE",
+      "mission": "The owner dashboard and everything behind it: dashboard pages and forms, server actions, auth, the SQLite/Postgres layer, Blob uploads, the schema and seed data, and scripts.",
+      "owns": [
+        "app/dashboard/",
+        "app/media/",
+        "components/dashboard-nav.tsx",
+        "components/login-form.tsx",
+        "components/client-form.tsx",
+        "components/driver-form.tsx",
+        "components/expense-form.tsx",
+        "components/job-form.tsx",
+        "components/money-tables.tsx",
+        "lib/",
+        "scripts/",
+        "types/",
+        "proxy.ts",
+        "instrumentation.ts"
+      ]
+    },
+    {
+      "id": "claude-code-local",
+      "name": "Claude Code on the owner's Mac (deploy and QA)",
+      "runs": "Claude Code in Terminal on the owner's Mac, with the Vercel plugin",
+      "branchPrefix": "claude-local/",
+      "env": "CLAUDECODE",
+      "mission": "Vercel deploys, environment variables, Neon Postgres and Blob storage, preview and production checks after every merge, build config, and CI.",
+      "owns": [
+        "next.config.ts",
+        "vercel.json",
+        ".github/"
+      ]
+    },
+    {
+      "id": "grok",
+      "name": "Grok (tests and QA)",
+      "runs": "Grok coding agent",
+      "branchPrefix": "grok/",
+      "mission": "Automated tests (unit and end-to-end), accessibility and performance checks, and code review of the other agents' branches and PRs. Reports bugs in other agents' files as Asks to the owner instead of fixing them.",
+      "owns": [
+        "tests/",
+        "playwright.config.ts",
+        "vitest.config.ts"
+      ]
+    }
+  ],
+  "shared": [
+    "package.json",
+    "package-lock.json",
+    "config/site.ts",
+    "config/types.ts",
+    "app/layout.tsx",
+    "app/globals.css",
+    "components/ui/",
+    "tsconfig.json",
+    "eslint.config.mjs",
+    "AGENTS.md",
+    "CLAUDE.md",
+    ".claude/",
+    ".cursor/"
+  ]
+}
