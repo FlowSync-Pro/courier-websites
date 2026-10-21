@@ -40,6 +40,7 @@ if (git(["rev-parse", "--verify", "--quiet", base], { allowFail: true }) === nul
 }
 
 const current = git(["rev-parse", "--abbrev-ref", "HEAD"]);
+const headSha = git(["rev-parse", "HEAD"]);
 const byId = (id) => roster.agents.find((a) => a.id === id);
 const byPrefix = (branch) => roster.agents.find((a) => branch.startsWith(a.branchPrefix));
 
@@ -93,11 +94,11 @@ function parseStatus(text) {
 // ---- Branches ----
 
 const branches = lines(
-  git(["for-each-ref", "--format=%(refname:short)\t%(committerdate:unix)\t%(subject)", `refs/remotes/${remote}/`]),
+  git(["for-each-ref", "--format=%(refname:short)\t%(objectname)\t%(committerdate:unix)\t%(subject)", `refs/remotes/${remote}/`]),
 )
   .map((l) => {
-    const [ref, ts, ...subject] = l.split("\t");
-    return { ref, name: ref.slice(remote.length + 1), ts: Number(ts), subject: subject.join("\t") };
+    const [ref, sha, ts, ...subject] = l.split("\t");
+    return { ref, sha, name: ref.slice(remote.length + 1), ts: Number(ts), subject: subject.join("\t") };
   })
   .filter((b) => b.ref !== remote && b.name !== "HEAD" && b.ref !== base);
 
@@ -203,7 +204,8 @@ console.log("\n== Open work on other branches ==");
 const open = [];
 const quiet = [];
 for (const b of branches) {
-  if (b.name === current) continue;
+  // Your own branch, by name or (on a detached checkout) by commit.
+  if (b.name === current || b.sha === headSha) continue;
   const files = pendingOn(b.ref);
   if (!files.length || now - b.ts > staleSeconds) {
     quiet.push(b.name);
