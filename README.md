@@ -32,7 +32,7 @@ Vercel serverless has no persistent disk, so SQLite files and `data/uploads/` do
 
 | Variable | When it is set |
 | --- | --- |
-| `DATABASE_URL` or `POSTGRES_URL` | Books go to Postgres. Leave both unset for local SQLite. Use the pooled connection string (Vercel Postgres `POSTGRES_URL`, or Neon’s pooled host). |
+| `DATABASE_URL`, `POSTGRES_URL`, `STORAGE_DATABASE_URL`, or `STORAGE_POSTGRES_URL` | Books go to Postgres. `DATABASE_URL` and `POSTGRES_URL` are checked first; the Neon integration’s `STORAGE_` names are fallbacks. When more than one of a pair is set, a pooled URL wins (hostname contains `-pooler.`, or `pgbouncer=true`). Unpooled names (`DATABASE_URL_UNPOOLED`, `POSTGRES_URL_NON_POOLING`, and the same names with a `STORAGE_` prefix) are ignored. Leave all four unset for local SQLite. |
 | `BLOB_READ_WRITE_TOKEN` | Quote photos, receipts, and delivery photos go to Vercel Blob, private, under `sites/<client-id>/`. Leave it unset to write `data/uploads/`. |
 | `SESSION_SECRET` | Signs the dashboard cookie. Set a long random value in production. |
 | `DASHBOARD_EMAIL` | Optional. Replaces the email in the client config. |
@@ -48,7 +48,7 @@ DATABASE_URL="postgres://..." npm run db:setup
 
 One Postgres database holds every brand. Each row has a `site_id` (the client config id, such as `summit-line` or `brightside-errands`). Queries only read the active site, so one brand’s customers never show up on another brand’s dashboard. Local SQLite still uses one file per client and stamps that same `site_id` on every row.
 
-Photos are limited to 4 MB because Vercel’s request body cap is about 4.5 MB. A VPS with a real disk can keep using SQLite and `data/uploads/` by leaving `DATABASE_URL`, `POSTGRES_URL`, and `BLOB_READ_WRITE_TOKEN` unset. That disk has to survive restarts.
+Photos are limited to 4 MB because Vercel’s request body cap is about 4.5 MB. A VPS with a real disk can keep using SQLite and `data/uploads/` by leaving `DATABASE_URL`, `POSTGRES_URL`, `STORAGE_DATABASE_URL`, `STORAGE_POSTGRES_URL`, and `BLOB_READ_WRITE_TOKEN` unset. That disk has to survive restarts.
 
 ## Demo login
 

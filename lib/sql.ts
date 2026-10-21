@@ -57,8 +57,26 @@ export function normalizeRow(value: unknown): SqlRow {
   return row;
 }
 
+const primaryDatabaseUrls = ["DATABASE_URL", "POSTGRES_URL"] as const;
+const storageDatabaseUrls = ["STORAGE_DATABASE_URL", "STORAGE_POSTGRES_URL"] as const;
+
+function readEnv(name: string) {
+  return process.env[name]?.trim() ?? "";
+}
+
+function isPooledDatabaseUrl(url: string) {
+  return url.includes("-pooler.") || /(?:\?|&)pgbouncer=true(?:&|$)/.test(url);
+}
+
+function firstDatabaseUrl(names: readonly string[]) {
+  const values = names.map(readEnv).filter((value) => value.length > 0);
+  return values.find(isPooledDatabaseUrl) ?? values[0] ?? "";
+}
+
 export function databaseUrl() {
-  return (process.env.DATABASE_URL || process.env.POSTGRES_URL || "").trim();
+  // Neon on Vercel injects pooled strings as DATABASE_URL and POSTGRES_URL,
+  // often prefixed with STORAGE_. Unpooled names are not read.
+  return firstDatabaseUrl(primaryDatabaseUrls) || firstDatabaseUrl(storageDatabaseUrls);
 }
 
 export function blobToken() {
