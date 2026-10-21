@@ -101,12 +101,28 @@ const branches = lines(
   })
   .filter((b) => b.ref !== remote && b.name !== "HEAD" && b.ref !== base);
 
-// Files a branch changes that are still different from the base. Squash-merged work drops out.
+// Files a branch changes that haven't landed on the base. A file counts as landed when the base has held
+// the branch's exact version since the branch point, so squash-merged work drops out even after later edits.
 function pendingOn(ref) {
   const mergeBase = git(["merge-base", base, ref], { allowFail: true });
   if (!mergeBase) return [];
-  const touched = new Set(lines(git(["diff", "--name-only", mergeBase, ref])));
-  return lines(git(["diff", "--name-only", base, ref])).filter((f) => touched.has(f));
+  const touched = lines(git(["diff", "--name-only", mergeBase, ref]));
+  if (!touched.length) return [];
+  const differs = new Set(lines(git(["diff", "--name-only", base, ref, "--", ...touched])));
+  const landed = new Set(
+    lines(git(["log", "--format=", "--raw", "--no-abbrev", "--no-renames", `${mergeBase}..${base}`]))
+      .map((l) => l.match(/^:\S+ \S+ \S+ (\S+) \S+\t(.+)$/))
+      .filter(Boolean)
+      .map(([, blob, file]) => `${file}\0${blob}`),
+  );
+  const blobs = new Map(
+    lines(git(["ls-tree", "-r", ref, "--", ...touched])).map((l) => {
+      const [meta, file] = l.split("\t");
+      return [file, meta.split(" ")[2]];
+    }),
+  );
+  const deleted = "0".repeat(40);
+  return touched.filter((f) => differs.has(f) && !landed.has(`${f}\0${blobs.get(f) ?? deleted}`));
 }
 
 // Same, for this checkout: commits, uncommitted edits, and new files.

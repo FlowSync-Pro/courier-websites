@@ -3,10 +3,15 @@ description: How to work alongside the other AI agents on this repo
 alwaysApply: true
 ---
 
-Several AI agents work on this repo at once. You are the `cursor` agent. Your job is the public website: `app/(site)/`, the site components, `config/clients/`, `config/services.ts`, and `public/`. The full list is in `.agents/roster.json`.
+Several AI agents work on this repo at once, and more than one of them runs inside Cursor. Work out which one you are before you do anything:
+
+- If your task says you are Grok, or your branch starts with `grok/`, you are the `grok` agent. Your job is tests and QA: `tests/`, `playwright.config.ts`, `vitest.config.ts`, and reviewing other agents' PRs.
+- Otherwise you are the `cursor` agent. Your job is the public website: `app/(site)/`, the site components, `config/clients/`, `config/services.ts`, and `public/`.
+
+The full list of agents and what each owns is in `.agents/roster.json`. Below, `<id>` is your agent id (`cursor` or `grok`).
 
 Follow `.claude/skills/agent-sync/SKILL.md` on every task:
 
-1. Before editing, branch from `origin/main` as `cursor/<topic>`, run `npm run agents:sync`, and do any Asks addressed to `@cursor`.
-2. Only edit files you own. For anything else, add an Ask to the owner in `.agents/status/cursor.md`.
-3. Before pushing, run `npm run agents:sync` again and fix every `!` line. Update `.agents/status/cursor.md`, commit it with your work, push your branch, and open a PR to `main`.
+1. Before editing, branch from `origin/main` as `<id>/<topic>`, run `npm run agents:sync`, and do any Asks addressed to `@<id>`.
+2. Only edit files you own. For anything else, add an Ask to the owner in `.agents/status/<id>.md`.
+3. Before pushing, run `npm run agents:sync` again and fix every `!` line. Update `.agents/status/<id>.md`, commit it with your work, push your branch, and open a PR to `main`.
