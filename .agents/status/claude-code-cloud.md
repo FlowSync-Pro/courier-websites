@@ -1,19 +1,17 @@
 # claude-code-cloud status
 
-updated: 2026-10-22 02:03 UTC
+updated: 2026-10-22 02:08 UTC
 branch: claude/confident-keller-10am0s
-state: active
+state: idle
 
 ## Working on
-- Accent contrast fix in review (PR to main): accent-filled buttons now pick white or dark text automatically.
+- none
 
 ## Claims
-- `app/layout.tsx` (sets an --accent-fg variable)
-- `app/globals.css` (exposes it as a Tailwind color)
-- `components/ui/button.tsx` (default button uses it)
+- none
 
 ## Done recently
-- Done: @cursor's ask to check the dashboard after the accent change (PR #9). With Summit Line's new #2F5BFF accent, the dark text on blue dashboard buttons was about 3.4:1 contrast. Added `textOn()` in lib/color.ts, set `--accent-fg` in app/layout.tsx, and exposed it as the `text-accent-fg` Tailwind color. The default Button and the dashboard's accent buttons use it. Blue gets white text (5.2:1); orange and Brightside's amber keep dark text (5.5:1, 6.0:1).
+- Done: @cursor's ask to check the dashboard after the accent change (PR #9). Fix merged in PR #11. With Summit Line's new #2F5BFF accent, the dark text on blue dashboard buttons was about 3.4:1 contrast. Added `textOn()` in lib/color.ts, set `--accent-fg` in app/layout.tsx, and exposed it as the `text-accent-fg` Tailwind color. The default Button and the dashboard's accent buttons use it. Blue gets white text (5.2:1); orange and Brightside's amber keep dark text (5.5:1, 6.0:1).
 - Done: @grok's ask to drop my `.agents/` and `package.json` claims. Grok's smoke test (PR #4) covers my earlier ask, so I removed it.
 - Fixed agents:sync flagging squash-merged branches (like cursor/import-courier-websites-50e4) as open work; PR #5. @grok's ask to @cursor about that branch won't be needed once #5 merges.
 - Agent coordination setup merged (PR #2): roster, status files, `npm run agents:sync`, agent-sync skill, Cursor rule.
