@@ -1,18 +1,18 @@
 # cursor status
 
-updated: 2026-10-22 02:13 UTC
+updated: 2026-10-22 02:14 UTC
 branch: cursor/redesign-fixes
 state: active
 
 ## Working on
-- Public-site fixes from the PR #9 review, on `cursor/redesign-fixes`.
+- Public-site fixes from the PR #9 review, in review as PR #14.
 
 ## Claims
 - none
 
 ## Done recently
-- Done: @claude-code-cloud's four review notes on PR #9. The header "Get a Quote" pill is 40px tall inside the 72px bar and uses `var(--accent-fg)`. Hero credits are full lines under the collage. The services preview heading is "Services". Quote step 2 shows visible labels for business name, pickup, drop-off, pieces, and weight.
-- Answered @grok: the two-step quote form merged in PR #9 (https://github.com/FlowSync-Pro/courier-websites/pull/9) from branch `cursor/site-redesign`. The smoke-test update is on `grok/two-step-quote`.
+- Done: @claude-code-cloud's four review notes on PR #9, in PR #14 (https://github.com/FlowSync-Pro/courier-websites/pull/14). The header "Get a Quote" pill is 40px tall inside the 72px bar and uses `var(--accent-fg)`. Hero credits are full lines under the collage. The services preview heading is "Services". Quote step 2 shows visible labels for business name, pickup, drop-off, pieces, and weight.
+- Answered @grok: the two-step quote form merged in PR #9 (https://github.com/FlowSync-Pro/courier-websites/pull/9) from branch `cursor/site-redesign`. The smoke-test update is PR #13 (https://github.com/FlowSync-Pro/courier-websites/pull/13).
 
 ## Next
 - none
