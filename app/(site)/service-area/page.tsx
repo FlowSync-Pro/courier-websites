@@ -1,28 +1,35 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { client } from "@/config/site";
-import { buttonVariants } from "@/components/ui/button";
+import { SectionHeading } from "../_components/section-heading";
+import "../_components/site.module.css";
 
 export const metadata: Metadata = { title: "Service area" };
 
 export default function ServiceAreaPage() {
   return (
-    <div className="mx-auto max-w-3xl px-4 py-8">
-      <p className="text-sm font-semibold uppercase tracking-wide text-accent-ink">Service area</p>
-      <h1 className="mt-1 font-display text-5xl font-bold leading-none">{client.serviceArea.region}</h1>
-      <p className="mt-4 text-lg">{client.serviceArea.intro}</p>
-      <div className="mt-8 grid gap-6">
+    <div className={`${"wrap"} ${"page"}`}>
+      <SectionHeading title={client.serviceArea.region} />
+      <p className={"lede"} style={{ textAlign: "center", marginTop: 16 }}>
+        {client.serviceArea.intro}
+      </p>
+      <div className={"cards"}>
         {client.serviceArea.areas.map((area) => (
-          <article key={area.name}>
-            <h2 className="font-display text-3xl font-bold">{area.name}</h2>
-            <p className="mt-2 text-lg leading-relaxed">{area.body}</p>
+          <article key={area.name} className={"pageCard"}>
+            <h2>{area.name}</h2>
+            <p>{area.body}</p>
           </article>
         ))}
       </div>
-      <p className="mt-8 rounded-md bg-brand px-4 py-4 text-lg text-white">{client.serviceArea.outsideNote}</p>
-      <Link href="/quote" className={`${buttonVariants({ size: "lg" })} mt-6`}>
-        Get a Quote
-      </Link>
+      <p className={"pageCard"} style={{ marginTop: 18 }}>
+        {client.serviceArea.outsideNote}
+      </p>
+      <p style={{ textAlign: "center", marginTop: 20 }}>
+        <Link href="/#quote" className={`${"pill"} ${"centerCta"}`}>
+          <b>Get My Free Quote</b>
+          <span>Across {client.serviceArea.region}</span>
+        </Link>
+      </p>
     </div>
   );
 }

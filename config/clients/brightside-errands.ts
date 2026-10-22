@@ -6,7 +6,7 @@ export const client: ClientConfig = {
   shortName: "Brightside",
   ownerLine: "Owner-operated. You talk to the person who does the driving.",
   ownerOperated: true,
-  headline: "Pharmacy, grocery, and errands — same day, brought to the door.",
+  headline: "[[Same-day]] pharmacy, grocery, and errands across [[Austin]]",
   subline:
     "An owner-operated sedan for central Austin, Round Rock, Cedar Park, and Pflugerville.",
   servicesIntro: "Errands a sedan can finish the same day.",

@@ -1,7 +1,11 @@
+"use client";
+
 import Link from "next/link";
+import { useState } from "react";
 import { client } from "@/config/site";
-import { Logo } from "@/components/logo";
 import { telHref } from "@/lib/catalog";
+import { Logo } from "@/components/logo";
+import "@/app/(site)/_components/site.module.css";
 
 const links = [
   ["/", "Home"],
@@ -11,44 +15,56 @@ const links = [
 ] as const;
 
 export function SiteHeader() {
+  const [open, setOpen] = useState(false);
+  const close = () => setOpen(false);
+
   return (
-    <header className="sticky top-0 z-40 border-b border-white/10 bg-brand text-white">
-      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-3 px-4">
-        <Link href="/" className="min-w-0" aria-label={client.legalName}>
+    <header className={"header"}>
+      <div className={`${"wrap"} ${"headerInner"}`}>
+        <Link href="/" aria-label={client.legalName} onClick={close}>
           <Logo />
         </Link>
-        <nav className="hidden items-center gap-5 text-sm font-semibold md:flex">
+        <nav className={"desktopNav"} aria-label="Primary">
           {links.map(([href, label]) => (
-            <Link key={href} href={href} className="hover:text-accent">
+            <Link key={href} href={href}>
               {label}
             </Link>
           ))}
-          <a href={telHref()} className="hover:text-accent">
+          <a className={"phoneLink"} href={telHref()}>
             {client.phoneDisplay}
           </a>
-          <Link href="/quote" className="rounded-md bg-accent px-3 py-2 text-brand">
-            Get a Quote
+          <Link href="/#quote" className={`${"pill"} ${"pillSlim"}`}>
+            <b>Get a Quote</b>
           </Link>
         </nav>
-        <details className="relative md:hidden">
-          <summary className="cursor-pointer rounded-md px-2 py-1 text-sm font-semibold">
-            Menu
-          </summary>
-          <nav className="absolute right-0 z-50 mt-2 w-52 rounded-md border border-line bg-white p-2 text-brand shadow-lg">
-            {links.map(([href, label]) => (
-              <Link key={href} href={href} className="block rounded px-3 py-2 font-semibold hover:bg-paper">
-                {label}
-              </Link>
-            ))}
-            <Link href="/quote" className="block rounded px-3 py-2 font-semibold hover:bg-paper">
-              Get a Quote
-            </Link>
-            <Link href="/login" className="block rounded px-3 py-2 text-sm text-muted hover:bg-paper">
-              Owner login
-            </Link>
-          </nav>
-        </details>
+        <button
+          type="button"
+          className={"menuBtn"}
+          aria-expanded={open}
+          aria-controls="site-menu"
+          onClick={() => setOpen((value) => !value)}
+        >
+          Menu
+        </button>
       </div>
+      {open ? (
+        <nav id="site-menu" className={`${"wrap"} ${"mobileNav"}`} aria-label="Mobile">
+          {links.map(([href, label]) => (
+            <Link key={href} href={href} onClick={close}>
+              {label}
+            </Link>
+          ))}
+          <a href={telHref()} onClick={close}>
+            {client.phoneDisplay}
+          </a>
+          <Link href="/#quote" onClick={close}>
+            Get a Quote
+          </Link>
+          <Link href="/login" onClick={close}>
+            Owner login
+          </Link>
+        </nav>
+      ) : null}
     </header>
   );
 }

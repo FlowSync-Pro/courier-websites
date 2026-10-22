@@ -6,7 +6,7 @@ export const client: ClientConfig = {
   shortName: "Summit Line",
   ownerLine: "Owner-operated. You talk to the owner, not a call center.",
   ownerOperated: true,
-  headline: "Freight and pallet delivery for businesses — same-day and scheduled.",
+  headline: "[[Same-Day]] freight and pallet delivery across [[Southern California]]",
   subline:
     "A 26-ft box truck with liftgate and a high-roof Sprinter, covering Los Angeles, Orange, Riverside, and San Bernardino counties.",
   servicesIntro: "The work this box truck and Sprinter actually do.",
@@ -17,13 +17,13 @@ export const client: ClientConfig = {
   email: "hello@summitlinedelivery.demo",
   domain: "summitlinedelivery.demo",
   timezone: "America/Los_Angeles",
-  colors: { primary: "#0E1C33", accent: "#FF5C1C" },
+  colors: { primary: "#111827", accent: "#2F5BFF" },
   seo: {
     title: "Summit Line Delivery — freight and pallet delivery in Southern California",
     description:
       "Owner-operated 26-ft box truck with liftgate and a high-roof Sprinter. Same-day and scheduled freight across Los Angeles, Orange, Riverside, and San Bernardino counties.",
   },
-  showDemandNotes: true,
+  showDemandNotes: false,
   servicesOffered: ["moving", "furniture", "store-pickups", "pallets", "courier", "food"],
   serviceArea: {
     region: "Southern California",

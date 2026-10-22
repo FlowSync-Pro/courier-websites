@@ -1,42 +1,51 @@
 import Link from "next/link";
 import { client } from "@/config/site";
 import { smsHref, telHref } from "@/lib/catalog";
+import "@/app/(site)/_components/site.module.css";
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-white/10 bg-brand text-white">
-      <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 md:grid-cols-3">
+    <footer className={"footer"}>
+      <div className={`${"wrap"} ${"footerGrid"}`}>
         <div>
-          <p className="font-display text-3xl font-bold">{client.legalName}</p>
-          <p className="mt-2 max-w-sm text-white/80">{client.ownerLine}</p>
+          <h2>{client.legalName}</h2>
+          <p>{client.ownerLine}</p>
         </div>
         <div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-accent">Reach us</p>
-          <a href={telHref()} className="mt-2 block text-2xl font-semibold">
-            {client.phoneDisplay}
-          </a>
-          <a href={smsHref()} className="mt-1 block text-white/80">
-            Text this number
-          </a>
-          <a href={`mailto:${client.email}`} className="mt-1 block text-white/80">
-            {client.email}
-          </a>
+          <p className={"kicker"} style={{ textAlign: "left" }}>
+            Reach us
+          </p>
+          <a href={telHref()}>{client.phoneDisplay}</a>
+          <p>
+            <a href={smsHref()}>Text this number</a>
+          </p>
+          <p>
+            <a href={`mailto:${client.email}`}>{client.email}</a>
+          </p>
         </div>
         <div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-accent">Service area</p>
-          <p className="mt-2 text-white/80">{client.serviceArea.region}</p>
-          <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm">
-            <Link href="/services">Services</Link>
-            <Link href="/service-area">Service area</Link>
-            <Link href="/about">About</Link>
-            <Link href="/quote">Get a Quote</Link>
-            <Link href="/login">Owner login</Link>
-          </div>
+          <p className={"kicker"} style={{ textAlign: "left" }}>
+            On this site
+          </p>
+          <ul>
+            <li>
+              <Link href="/services">Services</Link>
+            </li>
+            <li>
+              <Link href="/service-area">Service area</Link>
+            </li>
+            <li>
+              <Link href="/about">About</Link>
+            </li>
+            <li>
+              <Link href="/#quote">Get a Quote</Link>
+            </li>
+            <li>
+              <Link href="/login">Owner login</Link>
+            </li>
+          </ul>
         </div>
       </div>
-      <p className="border-t border-white/10 px-4 py-3 text-center text-[11px] text-white/60">
-        Photos are credited under each picture. Placeholder phone: {client.phoneDisplay}.
-      </p>
     </footer>
   );
 }
