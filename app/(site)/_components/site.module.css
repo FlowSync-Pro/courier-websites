@@ -123,6 +123,7 @@
 
 .shot {
   position: absolute;
+  overflow: hidden;
   border-radius: 22px;
   box-shadow: 0 16px 40px rgb(17 24 39 / 18%);
   background: #fff;
@@ -159,9 +160,26 @@
 
 .shotSolo {
   position: relative;
+  overflow: hidden;
   width: min(100%, 460px);
   margin: 28px auto 0;
+  border-radius: 22px;
+  box-shadow: 0 16px 40px rgb(17 24 39 / 18%);
   transform: rotate(-2deg);
+}
+
+.heroCredits {
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--body);
+  font-size: 13px;
+  line-height: 1.45;
+  text-align: left;
+}
+
+.heroCredits li + li {
+  margin-top: 4px;
 }
 
 .shotSolo img {
@@ -343,6 +361,18 @@
   font-size: 14px;
 }
 
+.field {
+  display: grid;
+  gap: 6px;
+}
+
+.fieldLabel {
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
 .file small,
 .hint,
 .privacy {
@@ -413,19 +443,6 @@
   font-weight: 500;
 }
 
-.pillSlim {
-  min-height: 46px;
-  width: auto;
-  padding: 0 18px;
-  border-width: 0;
-  box-shadow: none;
-}
-
-.pillSlim b {
-  font-size: 14px;
-  font-weight: 700;
-}
-
 .centerCta {
   width: min(640px, 100%);
   margin: 8px auto 0;
@@ -439,6 +456,26 @@
   .pill b {
     font-size: 28px;
   }
+}
+
+/* After the desktop pill size, so the header button stays inside the 72px bar. */
+.pill.pillSlim {
+  width: auto;
+  height: 40px;
+  min-height: 40px;
+  flex: 0 0 auto;
+  padding: 0 16px;
+  border-width: 0;
+  box-shadow: none;
+  color: var(--accent-fg);
+  white-space: nowrap;
+}
+
+.pill.pillSlim b {
+  color: var(--accent-fg);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
 }
 
 .guarantee {

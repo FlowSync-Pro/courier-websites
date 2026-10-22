@@ -118,7 +118,7 @@ export function QuoteCard({
         </div>
         <div hidden={step !== 2}>
           <div className={"formBody"} style={{ padding: 0 }}>
-            <Field label="Business name" name="businessName" placeholder="Business name…" autoComplete="organization" />
+            <Field label="Business name" name="businessName" placeholder="Business name…" autoComplete="organization" visible />
             <Field
               label="Pickup address"
               name="pickup"
@@ -126,6 +126,7 @@ export function QuoteCard({
               autoComplete="street-address"
               required={step === 2}
               error={shown.pickup}
+              visible
             />
             <Field
               label="Drop-off address"
@@ -133,6 +134,7 @@ export function QuoteCard({
               placeholder="Drop-off address…"
               required={step === 2}
               error={shown.dropoff}
+              visible
             />
             <label className={"file"}>
               What is being delivered *
@@ -140,9 +142,9 @@ export function QuoteCard({
               {shown.description ? <span className={"error"}>{shown.description}</span> : null}
             </label>
             <div className={"grid3"}>
-              <Field label={piecesLabel} name="pieces" placeholder={piecesLabel} />
-              <Field label="Weight, if known" name="weight" placeholder="Weight, if known…" />
-              <Field label="Date needed" name="dateNeeded" type="date" required={step === 2} error={shown.dateNeeded} />
+              <Field label={piecesLabel} name="pieces" placeholder={piecesLabel} visible />
+              <Field label="Weight, if known" name="weight" placeholder="Weight, if known…" visible />
+              <Field label="Date needed" name="dateNeeded" type="date" required={step === 2} error={shown.dateNeeded} visible />
             </div>
             <label className={"file"}>
               Photo (optional)
@@ -193,12 +195,13 @@ function Field({
   required,
   placeholder,
   type = "text",
+  visible = false,
   ...props
-}: React.ComponentProps<"input"> & { label: string; name: string; error?: string }) {
+}: React.ComponentProps<"input"> & { label: string; name: string; error?: string; visible?: boolean }) {
   const shownPlaceholder = placeholder ?? (required ? `${label}…` : label);
   return (
-    <label>
-      <span className={type === "date" ? "hint" : "sr-only"}>
+    <label className={visible ? "field" : undefined}>
+      <span className={visible ? "fieldLabel" : "sr-only"}>
         {label}
         {required ? " *" : ""}
       </span>
