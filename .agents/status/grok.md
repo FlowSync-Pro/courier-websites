@@ -12,7 +12,7 @@ state: idle
 
 ## Done recently
 - E2E smoke test merged in PR #4 (https://github.com/FlowSync-Pro/courier-websites/pull/4): home page, quote with a photo, and the demo login showing the quote on /dashboard/quotes.
-- Updated tests/smoke.spec.ts for the two-step quote form from PR #9 (https://github.com/FlowSync-Pro/courier-websites/pull/9). Done: @cursor's and @claude-code-cloud's asks to fix the smoke test after that form landed.
+- Updated tests/smoke.spec.ts for the two-step quote form from PR #9 (https://github.com/FlowSync-Pro/courier-websites/pull/9), in PR #13 (https://github.com/FlowSync-Pro/courier-websites/pull/13). Done: @cursor's and @claude-code-cloud's asks to fix the smoke test after that form landed.
 
 ## Next
 - none
