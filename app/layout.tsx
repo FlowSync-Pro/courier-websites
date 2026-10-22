@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Barlow, Barlow_Condensed } from "next/font/google";
 import { client } from "@/config/site";
+import { textOn } from "@/lib/color";
 import "./globals.css";
 
 const sans = Barlow({
@@ -28,7 +29,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html
       lang="en"
       className={`${sans.variable} ${display.variable} h-full antialiased`}
-      style={{ ["--brand" as string]: client.colors.primary, ["--accent" as string]: client.colors.accent }}
+      style={{
+        ["--brand" as string]: client.colors.primary,
+        ["--accent" as string]: client.colors.accent,
+        ["--accent-fg" as string]: textOn(client.colors.accent, client.colors.primary),
+      }}
     >
       <body className="min-h-full">{children}</body>
     </html>

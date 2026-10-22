@@ -66,7 +66,7 @@ export default async function QuotesPage() {
               ))}
               <Link
                 href={`/dashboard/jobs/new?client=${quote.client_id}&pickup=${encodeURIComponent(quote.pickup)}&dropoff=${encodeURIComponent(quote.dropoff)}`}
-                className="inline-flex h-10 items-center rounded-md bg-accent px-3 text-sm font-semibold text-brand"
+                className="inline-flex h-10 items-center rounded-md bg-accent px-3 text-sm font-semibold text-accent-fg"
               >
                 Log job
               </Link>
