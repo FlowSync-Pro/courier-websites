@@ -54,7 +54,12 @@ export default function HomePage() {
             <div className={"collage"}>
               {client.vehicles.slice(0, 2).map((vehicle) => (
                 <div key={vehicle.id} className={client.vehicles.length > 1 ? "shot" : "shotSolo"}>
-                  <PhotoFrame src={vehicle.photo.src} alt={vehicle.photo.alt} credit={vehicle.photo.credit} />
+                  <PhotoFrame
+                    src={vehicle.photo.src}
+                    alt={vehicle.photo.alt}
+                    credit={vehicle.photo.credit}
+                    showCredit={false}
+                  />
                 </div>
               ))}
               {chips.map((chip) => (
@@ -63,6 +68,13 @@ export default function HomePage() {
                 </span>
               ))}
             </div>
+            <ul className={"heroCredits"}>
+              {client.vehicles.slice(0, 2).map((vehicle) => (
+                <li key={vehicle.id}>
+                  {vehicle.name}: {vehicle.photo.credit}
+                </li>
+              ))}
+            </ul>
             <div className={"audience"}>
               <div className={"audienceBadge"}>
                 WE
@@ -212,7 +224,7 @@ export default function HomePage() {
 
       <section className={"section"}>
         <div className={"wrap"}>
-          <SectionHeading title={client.audienceHeading} />
+          <SectionHeading title="Services" />
           <div className={"cards"}>
             {services.map((service) => (
               <Link key={service.id} href={`/services#${service.id}`} className={"serviceCard"}>
