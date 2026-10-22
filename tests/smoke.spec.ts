@@ -15,16 +15,18 @@ test("summit line smoke: home, quote with photo, dashboard", async ({ page }) =>
 
   await test.step("quote with a photo submits", async () => {
     await page.goto("/quote");
-    await page.getByLabel("Name", { exact: true }).fill(name);
-    await page.getByLabel("Business name").fill("E2E Warehouse");
-    await page.getByLabel("Phone", { exact: true }).fill(stamp.slice(-10));
-    await page.getByLabel("Email", { exact: true }).fill(`e2e-${stamp}@summitlinedelivery.demo`);
-    await page.getByLabel("Pickup address").fill("100 Warehouse Way, Los Angeles, CA");
-    await page.getByLabel("Drop-off address").fill("200 Dock Street, Ontario, CA");
-    await page.getByLabel("What is being delivered").fill(description);
+    await page.getByRole("textbox", { name: "Full name" }).fill(name);
+    await page.getByRole("textbox", { name: "Phone" }).fill(stamp.slice(-10));
+    await page.getByRole("textbox", { name: "Email" }).fill(`e2e-${stamp}@summitlinedelivery.demo`);
+    await page.getByRole("button", { name: "Continue" }).click();
+
+    await page.getByRole("textbox", { name: "Business name" }).fill("E2E Warehouse");
+    await page.getByRole("textbox", { name: "Pickup address" }).fill("100 Warehouse Way, Los Angeles, CA");
+    await page.getByRole("textbox", { name: "Drop-off address" }).fill("200 Dock Street, Ontario, CA");
+    await page.getByRole("textbox", { name: "What is being delivered" }).fill(description);
     await page.getByLabel("Date needed").fill("2026-11-15");
     await page.getByLabel("Photo (optional)").setInputFiles(photoPath);
-    await page.getByRole("button", { name: "Get a Quote" }).click();
+    await page.getByRole("button", { name: "Get My Free Quote" }).click();
     await expect(page.getByRole("heading", { name: "Request received" })).toBeVisible();
   });
 
