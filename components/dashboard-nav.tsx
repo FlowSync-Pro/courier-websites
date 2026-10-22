@@ -46,7 +46,7 @@ export function DashboardNav({ level }: { level: "A" | "B" }) {
         })}
         <a
           href="/dashboard/export"
-          className="shrink-0 rounded-md bg-accent px-3 py-2 text-center text-sm font-semibold text-brand"
+          className="shrink-0 rounded-md bg-accent px-3 py-2 text-center text-sm font-semibold text-accent-fg"
         >
           Export CSV
         </a>

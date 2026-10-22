@@ -3,6 +3,7 @@
 :root {
   --brand: #0e1c33;
   --accent: #ff5c1c;
+  --accent-fg: #0e1c33;
   --paper: #f4f6f8;
   --line: #e2e6eb;
   --muted: #5c6b7a;
@@ -13,6 +14,7 @@
   --font-display: var(--font-barlow-condensed), "Arial Narrow", sans-serif;
   --color-brand: var(--brand);
   --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
   --color-paper: var(--paper);
   --color-line: var(--line);
   --color-muted: var(--muted);
